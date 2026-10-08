@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#D4AF37">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TLB">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>TOTAL LOOK BOUTIQUE | Luxury - Zinvié</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#D4AF37;--bg:#121212;--card:#1C1C1E;--h:80px}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:#fff;font-family:Inter,sans-serif}
+header{position:fixed;top:0;width:100%;z-index:100;background:rgba(18,18,18,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,175,55,.25);display:flex;justify-content:space-between;align-items:center;padding:0 5%;height:var(--h)}
+header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#D4AF37,#FFD700,transparent)}
+.logo{width:48px;height:48px;background:linear-gradient(135deg,#D4AF37,#fff2a8);color:#000;display:grid;place-items:center;font-weight:900;border-radius:12px;box-shadow:0 0 30px rgba(212,175,55,.6)}
+.btn-cart{background:#fff;color:#000;padding:12px 24px;border-radius:30px;font-weight:800;border:none;cursor:pointer;position:relative}
+.cart-count{position:absolute;top:-8px;right:-8px;background:linear-gradient(135deg,#D4AF37,#FFD700);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;color:#000;font-weight:900}
+.hero{height:90vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;padding:0 5%;background:radial-gradient(800px at 20% 20%,rgba(212,175,55,.15),transparent),url('images/fond.jpg') center/cover,url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070') center/cover #121212;position:relative}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#121212 35%,rgba(18,18,18,.6) 65%,transparent)}
+.hero-content{position:relative;z-index:2;max-width:540px}
+.hero h1{font-family:Cormorant Garamond,serif;font-size:82px;line-height:.9}
+.hero h1 span{background:linear-gradient(90deg,#D4AF37,#FFD700,#D4AF37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200%;animation:shine 3s linear infinite;font-style:italic}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+@keyframes glowMove{0%{left:-100%}100%{left:150%}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 15px rgba(212,175,55,.3)}50%{box-shadow:0 0 25px rgba(212,175,55,.6)}}
+.shine-contact{margin-top:16px;padding:12px 20px;border-radius:30px;display:inline-block;background:rgba(0,0,0,.6);border:1px solid rgba(212,175,55,.4);backdrop-filter:blur(10px);animation:pulseGold 2s infinite;position:relative;overflow:hidden}
+.shine-contact span{color:#D4AF37;font-weight:800;font-size:11px}
+.shine-contact::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);animation:glowMove 2.2s infinite}
+.filters{display:flex;gap:8px;justify-content:center;padding:30px 5% 12px;flex-wrap:wrap;position:sticky;top:var(--h);z-index:90;background:rgba(18,18,18,.92);backdrop-filter:blur(15px);border-bottom:1px solid #2C2C2E}
+.f-btn{flex:none;white-space:nowrap;padding:10px 16px;border-radius:30px;border:1px solid #222;background:#1C1C1E;color:#777;cursor:pointer;font-weight:700;transition:.3s;font-size:11px}
+.f-btn:hover{color:#D4AF37;border-color:rgba(212,175,55,.4)}
+.f-btn:focus-visible,.add:focus-visible,.btn-cart:focus-visible{outline:2px solid #D4AF37;outline-offset:2px}
+.f-btn.active{background:linear-gradient(135deg,#D4AF37,#FFD700);color:#000;border-color:#D4AF37}
+#shop{scroll-margin-top:calc(var(--h) + 80px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:28px;padding:30px 5% 40px}
+.card{background:var(--card);border:1px solid #1c1c1c;border-radius:22px;overflow:hidden;transition:.6s;position:relative;cursor:pointer}
+.card:hover{transform:translateY(-10px);border-color:rgba(212,175,55,.4);box-shadow:0 30px 60px rgba(0,0,0,.9),0 0 30px rgba(212,175,55,.15)}
+.card-img{height:420px;position:relative;overflow:hidden;background:#111}
+.card-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:.8s}
+.card-img img.active{opacity:1}
+.badge{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.7);border:1px solid rgba(212,175,55,.25);color:#D4AF37;padding:7px 14px;border-radius:20px;font-size:11px;z-index:5;font-weight:800;letter-spacing:1px}
+.price-tag{position:absolute;bottom:14px;right:14px;background:linear-gradient(135deg,#D4AF37,#FFD700);color:#000;padding:8px 16px;border-radius:20px;font-weight:800;z-index:5}
+.old-price{position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,.7);color:#888;padding:6px 10px;border-radius:20px;font-size:11px;text-decoration:line-through;z-index:5}
+.card-body{padding:18px}
+.card-body h4{font-family:Cormorant Garamond,serif;font-size:18px;line-height:1.3}
+.add{width:100%;background:#fff;color:#000;padding:14px;border:none;border-radius:12px;font-weight:800;margin-top:12px;cursor:pointer;position:relative;overflow:hidden}
+.add::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);animation:glowMove 2.5s infinite}
+.add:hover{background:linear-gradient(135deg,#D4AF37,#FFD700)}
+#lieu{background:#0e0e0e;border-top:1px solid rgba(212,175,55,.15);border-bottom:1px solid rgba(212,175,55,.15);padding:50px 5%;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+#drawer{position:fixed;right:-430px;top:0;width:400px;max-width:95vw;height:100%;background:#0c0c0c;border-left:1px solid rgba(212,175,55,.2);z-index:200;padding:24px;transition:.5s;display:flex;flex-direction:column}
+#drawer.open{right:0}
+#gallery{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:300;display:none;flex-direction:column}
+#gallery.open{display:flex}
+footer{background:#050505;border-top:1px solid rgba(212,175,55,.15);padding:60px 5% 24px}
+@media(max-width:800px){.filters{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding:14px 5%;scrollbar-width:none;-webkit-overflow-scrolling:touch}.filters::-webkit-scrollbar{display:none}.hero{grid-template-columns:1fr;height:auto;padding:110px 5% 40px}.hero h1{font-size:52px}.grid{grid-template-columns:1fr 1fr}#lieu{grid-template-columns:1fr}}
+@media(max-width:500px){.grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+#installBar{position:fixed;left:12px;right:12px;bottom:12px;z-index:300;display:none;align-items:center;gap:12px;background:#1C1C1E;border:1px solid rgba(212,175,55,.5);border-radius:18px;padding:12px 14px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+#installBar.show{display:flex}
+#installBar img{width:44px;height:44px;border-radius:11px}
+#installBar div{flex:1;font-size:13px;line-height:1.35}
+#installBar b{color:#D4AF37}
+#installBar button{border:none;border-radius:20px;padding:10px 16px;font-weight:800;cursor:pointer}
+#installOk{background:linear-gradient(135deg,#D4AF37,#FFD700);color:#000}
+#installNo{background:none;color:#888}
+</style>
+</head>
+<body>
+<header>
+<div style="display:flex;align-items:center;gap:14px"><div class="logo">TLB</div><div><b style="letter-spacing:3px">TOTAL LOOK</b><br><small style="letter-spacing:6px;font-size:9px;color:#D4AF37">BOUTIQUE GOLD</small></div></div>
+<button class="btn-cart" onclick="document.getElementById('drawer').classList.toggle('open')">PANIER <span id="cnt" class="cart-count">0</span></button>
+</header>
+<section class="hero">
+<div class="hero-content">
+<h1>La mode<br><span>qui impose</span><br>le respect.</h1>
+<p style="color:#aaa;margin:18px 0;line-height:1.7;font-size:14px">Collection premium Homme & Femme. Pull-over, Palazo, Joggings, Crêpes, Chemises manches longues & courtes, Robes, Talons Femme. Stock limité.</p>
+<button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" style="background:linear-gradient(135deg,#D4AF37,#FFD700);color:#000;padding:16px 32px;border:none;border-radius:30px;font-weight:800;cursor:pointer">DÉCOUVRIR LA COLLECTION</button>
+<div class="shine-contact"><span>📍 1km Haut Les Mains, bord goudron Hôpital La Croix • 01 48 77 36 80 / 01 67 13 36 45</span></div>
+</div>
+</section>
+<div class="filters">
+<button class="f-btn active" onclick="filtrer('all',this)">Tout voir (9)</button>
+<button class="f-btn" onclick="filtrer('homme',this)">Homme</button>
+<button class="f-btn" onclick="filtrer('femme',this)">Femme</button>
+<button class="f-btn" onclick="filtrer('chemise',this)">Chemises</button>
+<button class="f-btn" onclick="filtrer('robe',this)">Robe</button>
+<button class="f-btn" onclick="filtrer('crepe',this)">Crêpe</button>
+<button class="f-btn" onclick="filtrer('chaussure',this)">Hermes</button>
+<button class="f-btn" onclick="filtrer('talon',this)">Talons Femme</button>
+</div>
+<div class="grid" id="shop"></div>
+<section id="lieu">
+<div>
+<h2 style="font-family:Cormorant Garamond,serif;font-size:36px;color:#D4AF37">Notre Boutique à Zinvié</h2>
+<p style="color:#aaa;margin:14px 0;line-height:1.7">Collection premium Homme & Femme. Pull-over, Palazo, Joggings, Crêpes, Chemises manches longues & courtes, Robes, Talons Femme.</p>
+<div style="margin-top:18px;display:grid;gap:12px">
+<div style="background:#1C1C1E;border:1px solid #222;padding:14px 18px;border-radius:14px"><b>📍 Adresse</b><br><span style="color:#aaa;font-size:13px">Zinvié, 1km Haut Les Mains, bord goudron Hôpital La Croix - Bénin</span></div>
+<div style="background:#1C1C1E;border:1px solid #222;padding:14px 18px;border-radius:14px"><b>📞 01 48 77 36 80 / 01 67 13 36 45</b><br><span style="color:#aaa;font-size:13px">Appel & WhatsApp 7j/7</span></div>
+</div>
+<div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+<a href="https://wa.me/2290167133645" target="_blank" style="background:#25D366;color:#fff;padding:12px 20px;border-radius:30px;text-decoration:none;font-weight:800;font-size:13px">WhatsApp Direct</a>
+<a href="https://www.google.com/maps/search/Zinvié+Haut+Les+Mains" target="_blank" style="background:#fff;color:#000;padding:12px 20px;border-radius:30px;text-decoration:none;font-weight:800;font-size:13px">Google Maps →</a>
+</div>
+</div>
+<div style="border-radius:22px;overflow:hidden;border:1px solid rgba(212,175,55,.25)"><iframe src="https://www.google.com/maps?q=Zinvié%20Haut%20Les%20Mains%20Bénin&z=14&output=embed" width="100%" height="360" style="border:0" loading="lazy"></iframe></div>
+</section>
+<div id="gallery">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 5%;border-bottom:1px solid rgba(212,175,55,.2);background:#0c0c0c">
+<h2 id="gt" style="font-family:Cormorant Garamond;color:#D4AF37;font-size:20px"></h2>
+<button onclick="document.getElementById('gallery').classList.remove('open')" style="background:#222;color:#fff;padding:12px 22px;border:none;border-radius:30px;cursor:pointer">✕ Fermer</button>
+</div>
+<div id="ggrid" style="flex:1;overflow:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;padding:20px 5%;align-items:start;align-content:start;grid-auto-rows:max-content"></div>
+</div>
+<div id="drawer">
+<h2 style="font-family:Cormorant Garamond;color:#D4AF37;font-size:28px">Votre sélection</h2>
+<div id="items" style="flex:1;margin:22px 0;overflow:auto;color:#aaa">Panier vide</div>
+<div id="total" style="font-size:22px;font-weight:800;color:#D4AF37"></div>
+<button onclick="commander()" style="background:#25D366;color:#fff;padding:16px;border:none;border-radius:14px;font-weight:800;margin-top:16px;width:100%">COMMANDER SUR WHATSAPP</button>
+<button onclick="document.getElementById('drawer').classList.remove('open')" style="background:none;border:1px solid #222;color:#666;padding:12px;border-radius:12px;margin-top:10px;width:100%">Continuer shopping</button>
+</div>
+<footer>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:34px;max-width:1200px;margin:0 auto">
+    <div><div style="display:flex;align-items:center;gap:10px"><div class="logo" style="width:36px;height:36px">TLB</div><b>TOTAL LOOK BOUTIQUE</b></div><p style="color:#666;font-size:13px;margin-top:14px;line-height:1.7">Collection premium Homme & Femme. Pull-over, Palazo, Joggings, Crêpes, Chemises manches longues & courtes, Robes, Talons Femme.</p></div>
+    <div><h4 style="font-size:11px;letter-spacing:3px;color:#fff;margin-bottom:14px">BOUTIQUE GOLD</h4><p style="color:#666;font-size:13px;line-height:2.3">c1:18 • c2:3 • c3:4 • c4:7<br>c5:25 • c6:11 • c7:4 • c8:13<br>c9:8 Talons Femme 7.000f<br>Hermes 25k à 30k SANS barré</p></div>
+    <div><h4 style="font-size:11px;letter-spacing:3px;color:#fff;margin-bottom:14px">CONTACT</h4><p style="color:#666;font-size:13px;line-height:2.3">📍 Zinvié 1km Haut Les Mains<br>📞 01 48 77 36 80<br>📞 01 67 13 36 45<br>💬 WhatsApp 24/7</p></div>
+  </div>
+  <div style="border-top:1px solid #151515;margin-top:45px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <p style="color:#444;font-size:12px">© <span id="year"></span> TOTAL LOOK BOUTIQUE • Bénin 🇧🇯 • 9 collections - 93 photos</p>
+    <p style="color:#555;font-size:11px;letter-spacing:2px">LIVRAISON CALAVI-COTONOU</p>
+  </div>
+</footer>
+<script>
+let produits=[
+  {id:1,nom:"Complet femme + robes à 4.000f",genre:"femme",prix:4000,ancien:null,dossier:"images/c1",nb:18,tags:["femme","robe","complet"]},
+  {id:2,nom:"Chemise à 3.000f, Pantalon à 4.000f, Complet à 7.000f",genre:"homme",prix:7000,ancien:null,dossier:"images/c2",nb:3,tags:["homme","chemise","complet"]},
+  {id:3,nom:"Chemise à 3.500f, Pantalon à 4.000f, Complet à 7.500f",genre:"homme",prix:7500,ancien:8000,dossier:"images/c3",nb:4,tags:["homme","chemise","complet"]},
+  {id:4,nom:"Robes femmes à 3.500f",genre:"femme",prix:3500,ancien:5000,dossier:"images/c4",nb:7,tags:["femme","robe"]},
+  {id:5,nom:"Complet homme à 9.000f",genre:"homme",prix:9000,ancien:12000,dossier:"images/c5",nb:25,tags:["homme","complet"]},
+  {id:6,nom:"Unité à 8.000f",genre:"homme",prix:8000,ancien:10000,dossier:"images/c6",nb:11,tags:["homme","complet"]},
+  {id:7,nom:"Crêpes à 4.500f au lieu de 5.000f",genre:"femme",prix:4500,ancien:5000,dossier:"images/c7",nb:4,tags:["femme","crepe","robe"]},
+  {id:8,nom:"Chaussures Hermes importées en carton à 25.000f à 30.000f",genre:"homme",prix:25000,ancien:null,dossier:"images/c8",nb:13,tags:["homme","chaussure"]},
+  {id:9,nom:"Talons Femme Premium à 7.000f",genre:"femme",prix:7000,ancien:10000,dossier:"images/c9",nb:8,tags:["femme","chaussure","talon"]}
+];
+let panier=[],cur=null;
+function ph(i){return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="700"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#D4AF37" font-family="sans-serif" font-size="28" text-anchor="middle">Photo '+i+'</text></svg>')}
+function afficher(liste){
+ document.getElementById('shop').innerHTML=liste.map(p=>`
+ <div class="card" onclick="openGallery(${p.id})">
+  <div class="card-img" id="slider-${p.id}">
+    ${Array.from({length:p.nb},(_,i)=>`<img src="${p.dossier}/${i+1}.jpg" alt="${p.nom} - photo ${i+1}" class="${i===0?'active':''}" loading="lazy" onerror="this.style.display='none'">`).join('')}
+    <span class="badge">${p.genre.toUpperCase()}</span>
+    ${p.ancien? `<span class="old-price">au lieu de ${p.ancien.toLocaleString()}f</span>` : ''}
+    <span class="price-tag">${p.prix.toLocaleString()}F</span>
+  </div>
+  <div class="card-body">
+   <h4>${p.nom}</h4>
+   <div style="margin-top:8px"><b style="color:#D4AF37">${p.prix.toLocaleString()}F</b>${p.ancien?`<small style="color:#555;text-decoration:line-through;margin-left:8px">au lieu de ${p.ancien.toLocaleString()}F</small>`:''}</div>
+   <button class="add">Voir la collection →</button>
+  </div>
+ </div>`).join('');
+}
+let _idx=0;
+setInterval(()=>{
+  _idx++;
+  document.querySelectorAll('.card-img').forEach(cont=>{
+    const imgs=cont.querySelectorAll('img'); if(imgs.length<=1) return;
+    imgs.forEach(im=>im.classList.remove('active'));
+    imgs[_idx%imgs.length].classList.add('active');
+  });
+},2800);
+function filtrer(f,b){document.querySelectorAll('.f-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(f==='all')afficher(produits);else afficher(produits.filter(p=>p.genre===f||p.tags.includes(f)));}
+function openGallery(id){
+  cur=produits.find(p=>p.id===id);
+  document.getElementById('gt').textContent=cur.nom+(cur.ancien?` • au lieu de ${cur.ancien.toLocaleString()}f`:'');
+  let h='';
+  for(let i=1;i<=cur.nb;i++){
+    const src=`${cur.dossier}/${i}.jpg`;
+    h+=`<div style="background:#111;border-radius:18px;overflow:hidden;border:1px solid #222;align-self:start;min-height:max-content">
+      <img src="${src}" alt="${cur.nom} - photo ${i}" style="width:100%;height:auto;display:block"
+        onload="this.nextElementSibling.querySelector('.dim').textContent=this.dataset.ph?'photo introuvable':this.naturalWidth+' × '+this.naturalHeight+' px'"
+        onerror="this.onerror=null;this.dataset.ph=1;this.src=ph(${i})">
+      <div style="padding:10px;display:flex;justify-content:space-between;gap:8px">
+        <small style="color:#D4AF37">Photo #${i}</small>
+        <small class="dim" style="color:#888"></small>
+        <small style="color:#fff">${cur.prix.toLocaleString()}F</small>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px">
+        <button onclick="ajouter(${cur.id},${i})" style="padding:11px;border:none;border-radius:10px;font-weight:800;background:#fff;color:#000">Ajouter</button>
+        <button onclick="commanderDirect(${i})" style="padding:11px;border:none;border-radius:10px;font-weight:800;background:linear-gradient(135deg,#D4AF37,#FFD700);color:#000">Commander</button>
+      </div>
+    </div>`;
+  }
+  document.getElementById('ggrid').innerHTML=h;
+  document.getElementById('gallery').classList.add('open');
+}
+function ajouter(id,photoNum){let p=produits.find(x=>x.id===id)||cur;panier.push({id:p.id,nom:p.nom,prix:p.prix,photo:photoNum||1});maj();document.getElementById('drawer').classList.add('open')}
+function commanderDirect(photoNum){let msg=`Bonjour TOTAL LOOK BOUTIQUE\nJe veux commander:\n- ${cur.nom} Photo ${photoNum} ${cur.prix}F`;window.open("https://wa.me/2290167133645?text="+encodeURIComponent(msg),"_blank");}
+function maj(){document.getElementById('cnt').innerText=panier.length;document.getElementById('items').innerHTML=panier.length?panier.map((p,i)=>`<div style="display:flex;justify-content:space-between;margin:10px 0"><div>${p.nom}<br><small style="color:#D4AF37">Photo #${p.photo} - ${p.prix}F</small></div><span onclick="panier.splice(${i},1);maj()" style="color:#f55;cursor:pointer">✕</span></div>`).join('<hr style="border-color:#222">'):'Panier vide';document.getElementById('total').innerText=panier.length?"Total: "+panier.reduce((s,p)=>s+p.prix,0).toLocaleString()+"F":"";}
+function commander(){if(!panier.length)return alert('Panier vide');let t=panier.reduce((s,p)=>s+p.prix,0);let msg=`Bonjour TOTAL LOOK BOUTIQUE\nJe veux commander:\n${panier.map(p=>"- "+p.nom+" Photo "+p.photo+" "+p.prix+"F").join("\n")}\nTotal: ${t}F`;window.open("https://wa.me/2290167133645?text="+encodeURIComponent(msg),"_blank");}
+function calcH(){document.documentElement.style.setProperty('--h',document.querySelector('header').offsetHeight+'px')}
+calcH();addEventListener('resize',calcH);addEventListener('load',calcH);
+addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('gallery').classList.remove('open');document.getElementById('drawer').classList.remove('open')}});
+document.getElementById('year').textContent=new Date().getFullYear();
+afficher(produits);
+</script>
+<div id="installBar"><img src="icons/icon-192.png" alt="TLB"><div><b>TOTAL LOOK BOUTIQUE</b><br><span id="installTxt">Installez l'application sur votre téléphone</span></div><button id="installOk">Installer</button><button id="installNo" aria-label="Fermer">✕</button></div>
+<script>
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+(function(){
+  const bar=document.getElementById('installBar'),ok=document.getElementById('installOk'),no=document.getElementById('installNo'),txt=document.getElementById('installTxt');
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  let dismissed=false;try{dismissed=localStorage.getItem('tlbInstallNo')==='1'}catch(e){}
+  if(standalone||dismissed)return;
+  let ev=null;
+  addEventListener('beforeinstallprompt',e=>{e.preventDefault();ev=e;bar.classList.add('show')});
+  ok.onclick=async()=>{
+    if(ev){ev.prompt();await ev.userChoice;ev=null;bar.classList.remove('show')}
+    else{alert("Sur iPhone : touchez Partager puis « Sur l'écran d'accueil ».")}
+  };
+  no.onclick=()=>{bar.classList.remove('show');try{localStorage.setItem('tlbInstallNo','1')}catch(e){}};
+  addEventListener('appinstalled',()=>bar.classList.remove('show'));
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(ios){txt.textContent="Touchez Partager puis « Sur l'écran d'accueil »";ok.textContent='Comment ?';setTimeout(()=>bar.classList.add('show'),2500)}
+})();
+</script>
+</body>
+</html>
